@@ -1,0 +1,53 @@
+<head>
+    <meta charset="utf-8">
+    <title>Beautico</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Minimal Admin & Dashboard Template" name="description">
+    <meta content="Themesbrand" name="author">
+    <!-- App favicon -->
+    <link rel="shortcut icon" th:href="@{/../images/favicon.ico}">
+
+    <!-- Fonts css load -->
+    <link rel="preconnect" th:href="@{https://fonts.googleapis.com/}">
+    <link rel="preconnect" th:href="@{https://fonts.gstatic.com/}" crossorigin>
+    <link id="fontsLink" th:href="@{https://fonts.googleapis.com/}" rel="stylesheet">
+
+    <!-- jsvectormap css -->
+    <link th:href="@{/../libs/jsvectormap/css/jsvectormap.min.css}" rel="stylesheet" type="text/css">
+
+    <!--Swiper slider css-->
+    <link th:href="@{/../libs/swiper/swiper-bundle.min.css}" rel="stylesheet" type="text/css">
+
+    <!-- Layout config Js -->
+    <script th:src="@{/../js/layout.js}"></script>
+    <!-- Bootstrap Css -->
+    <link th:href="@{/../css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+    <!-- Icons Css -->
+    <link th:href="@{/../css/icons.min.css}" rel="stylesheet" type="text/css">
+    <!-- App Css-->
+    <link th:href="@{/../css/app.min.css}" rel="stylesheet" type="text/css">
+    <!-- custom Css-->
+    <link th:href="@{/../css/custom.min.css}" rel="stylesheet" type="text/css">
+
+    <!--  //hien thong bao-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+    <style>
+        .product-img .dropzone {
+            position: relative !important;
+            width: 100% !important;
+            height: 40%; /* Điều chỉnh độ cao của div dropzone theo ý muốn */
+        }
+
+        .product-img  .dropzone img.customer-img {
+            position: absolute !important;
+            width: 60% !important;
+            height: 60% !important;
+            top: 5% !important;
+            left: 5% !important;
+            right: 5% !important;
+            bottom: 5% !important;
+            object-fit: cover;
+        }
+    </style>
+
+</head>

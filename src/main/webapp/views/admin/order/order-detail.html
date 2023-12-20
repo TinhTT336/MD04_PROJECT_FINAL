@@ -1,0 +1,249 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" data-layout="vertical" data-sidebar="dark" data-sidebar-size="lg"
+      data-preloader="disable" data-theme="default" data-topbar="light" data-bs-theme="light">
+
+<th:block th:insert="admin/layout/head.html"></th:block>
+<style>
+    .order-detail-info{
+        min-height: 83px !important;
+    }
+    .order-detail-info-fixed-height{
+        min-height: 140px !important;
+    }
+
+</style>
+<body>
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <!-- ========== App Menu ========== -->
+    <th:block th:insert="admin/layout/sidebar.html"></th:block>
+    <!-- Left Sidebar End -->
+    <!-- Vertical Overlay-->
+    <div class="vertical-overlay"></div>
+    <th:block th:insert="admin/layout/header.html"></th:block>
+
+    <!-- ============================================================== -->
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Order Detail</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row row-cols-xxl-5 row-cols-lg-3 row-cols-md-2 row-cols-1">
+                    <div class="col pe-0 order-detail-info" >
+                        <div class="card text-center border border-dashed p-3 rounded">
+                            <div class="card-body">
+                                <p class="text-muted mb-2">Order ID</p>
+                                <h6 class="fs-md mb-0" th:text="${order.orderId}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col px-0">
+                        <div class="card text-center border border-dashed p-3 rounded">
+                            <div class="card-body order-detail-info">
+                                <p class="text-muted mb-2">Order Date</p>
+                                <h6 class="fs-md mb-0" th:text="${order.order_at}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col px-0" >
+                        <div class="card text-center border border-dashed p-3 rounded">
+                            <div class="card-body order-detail-info">
+                                <p class="text-muted mb-2">Payment</p>
+                                <h6 class="fs-md mb-0" th:text="${order.payment}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col px-0">
+                        <div class="card text-center border border-dashed p-3 rounded">
+                            <div class="card-body order-detail-info">
+                                <p class="text-muted mb-2">Order Total</p>
+                                <h6 class="fs-md mb-0" th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 0, 'POINT') + ' $'}"></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col ps-0">
+                        <div class="card text-center border border-dashed p-3 rounded">
+                            <div class="card-body order-detail-info">
+                                <p class="text-muted mb-2">Order Status</p>
+                                <span class="badge mb-0"
+                                      th:classappend="${order.orderStatus == 0 ? 'text-info bg-info-subtle' : (order.orderStatus == 1 ? 'text-primary bg-primary-subtle' : 'text-danger bg-danger-subtle')}"
+                                      th:text="${order.orderStatus == 0 ? 'Pending' : (order.orderStatus == 1 ? 'Confirmed' : 'Cancel')}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card border-bottom border-2 border-secondary">
+                            <div class="card-body d-flex gap-3 order-detail-info-fixed-height">
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title mb-3">Customer Info</h6>
+                                    <p class="fw-medium fs-md mb-1" th:text="${order.user.username}"></p>
+                                    <p class="text-muted mb-1" th:text="${order.user.address}"></p>
+                                    <p class="text-muted mb-0" th:text="${order.user.phone}"></p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <img th:src="@{|/uploads/images/${order.user.avatar}|}" alt=""
+                                         class="avatar-sm rounded img-thumbnail">
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                    <div class="col-xxl-4 col-md-6">
+                        <div class="card border-bottom border-2 border-primary">
+                            <div class="card-body d-flex gap-3 order-detail-info-fixed-height">
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title mb-3">Receiver Info</h6>
+                                    <p class="fw-medium fs-md mb-1"></p>
+                                    <p class="text-muted mb-1" th:text="${order.address}"></p>
+                                    <p class="text-muted mb-0"></p>
+                                    <p class="text-muted mb-0"></p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="avatar-sm">
+                                        <div class="avatar-title bg-primary-subtle text-primary fs-3 rounded">
+                                            <i class="ph-truck"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+
+                    <div class="col-xxl-4 col-md-6 ">
+                        <div class="card border-bottom border-2 border-info">
+                            <div class="card-body d-flex gap-3 order-detail-info-fixed-height">
+                                <div class="flex-grow-1">
+                                    <h6 class="card-title mb-3">Order Note</h6>
+                                    <p class="text-muted mb-1" th:text="${order.note}"></p>
+                                    <p class="text-muted mb-0"></p>
+                                    <p class="text-muted mb-0"></p>
+                                </div>
+                                <div class="flex-shrink-0">
+                                    <div class="avatar-sm">
+                                        <div class="avatar-title bg-light text-body fs-3 rounded">
+                                            <i class="ph-currency-circle-dollar"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+
+                <div class="row">
+                    <div class="col-xxl-9">
+                        <div class="card">
+                            <div class="card-header d-flex align-items-center gap-3">
+                                <h6 class="card-title mb-0 flex-grow-1">Product Items</h6>
+                                <div class="flex-shrink-0" th:if="${order.orderStatus==0}">
+                                    <a th:href="@{/admin/order/order-confirm/{id}(id=${order.orderId})}"><button type="button" class="btn btn-secondary btn-sm me-2"><i
+                                            class="ph-v align-middle"></i> Confirm Order
+                                    </button></a>
+                                    <a th:href="@{/admin/order/order-cancel/{id}(id=${order.orderId})}"><button type="button" class="btn btn-danger btn-sm"><i
+                                            class="ph-x align-middle"></i> Cancel Order
+                                    </button></a>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table align-middle table-nowrap table-borderless table-hover">
+                                        <thead class="table-active">
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Product Price</th>
+                                            <th>Quantity</th>
+                                            <th class="text-end">Amount</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="orderDetail:${orderDetailList}">
+                                            <td>
+                                                <div class="product-item d-flex align-items-center gap-2">
+                                                    <div class="avatar-sm flex-shrink-0">
+                                                        <div class="avatar-title bg-light rounded">
+                                                            <img th:src="@{|/uploads/images/${orderDetail.product.image}|}" alt=""
+                                                                 class="avatar-xs">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h6 class="fs-md"><a
+                                                                href="apps-ecommerce-product-details.html"
+                                                                class="text-reset" th:text="${orderDetail.product.productName}"></a>
+                                                        </h6>
+                                                        <p class="text-muted mb-0"><a href="#!"
+                                                                                      class="text-reset" th:text="${orderDetail.product.category.categoryName}"></a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td th:text="${#numbers.formatDecimal(orderDetail.orderPrice, 0, 'COMMA', 0, 'POINT') + ' $'}"></td>
+                                            <td th:text="${orderDetail.quantity}"></td>
+                                            <td class="fw-medium text-end" th:text="${#numbers.formatDecimal(orderDetail.orderPrice*orderDetail.quantity, 0, 'COMMA', 0, 'POINT') + ' $'}"></td>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!--end card-->
+                    </div><!--end col-->
+                    <div class="col-xxl-3">
+                        <div class="row">
+                            <div class="col-xxl-12 col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6 class="card-title mb-0">Total order amount</h6>
+                                    </div>
+                                    <div class="card-body pt-4">
+                                        <div class="table-responsive table-card">
+                                            <table class="table table-borderless mb-0">
+                                                <tbody>
+                                                <tr class="border-top border-top-dashed">
+                                                    <th scope="row">Total (USD) :</th>
+                                                    <th class="text-end" th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 0, 'POINT') + ' $'}"></th>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end col-->
+                </div><!--end row-->
+
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <th:block th:insert="admin/layout/footer.html"></th:block>
+    </div>
+    <!-- end main content-->
+
+</div>
+<!-- END layout-wrapper -->
+
+<th:block th:insert="admin/layout/backtotop.html"></th:block>
+
+<!--preloader-->
+<th:block th:insert="admin/layout/preloader.html"></th:block>
+<!-- JAVASCRIPT -->
+<th:block th:insert="admin/layout/script.html"></th:block>
+
+</body>
+
+<!-- Mirrored from themesbrand.com/steex/layouts/apps-ecommerce-order-overview.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Dec 2023 01:12:58 GMT -->
+</html>

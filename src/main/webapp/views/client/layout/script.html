@@ -1,0 +1,96 @@
+
+<script data-cfasync="false" th:src="@{/../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js}"></script>
+<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/jquery.nice-select.min.js}"></script>
+
+<script th:src="@{/js/jquery.fancybox.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/slick.js}"></script>
+
+<script th:src="@{/js/swiper-bundle.min.js}"></script>
+<script th:src="@{/js/waypoints.min.js}"></script>
+
+<script th:src="@{/js/main.js}"></script>
+<script>
+    // Tự động ẩn thông báo sau 15 giây
+    setTimeout(function () {
+        var elements = document.getElementsByClassName("alertMessage");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+        }
+    }, 5000);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+<!--<script>-->
+<!--    // Kiểm tra URL có chứa tham số error=true hay không-->
+<!--    const urlParams = new URLSearchParams(window.location.search);-->
+<!--    const error = urlParams.get('error');-->
+<!--    const logout = urlParams.get('logout');-->
+
+<!--    // Nếu có lỗi, hiển thị popup thông báo lỗi-->
+<!--    if (error === 'true') {-->
+<!--        Swal.fire({-->
+<!--            icon: 'error',-->
+<!--            title: 'Sign in failed!',-->
+<!--            text: 'Please check your information.'-->
+<!--        });-->
+<!--    } else {-->
+<!--        // Nếu không có lỗi, hiển thị popup thông báo thành công-->
+<!--        Swal.fire({-->
+<!--            icon: 'success',-->
+<!--            title: 'Sign in successfully!',-->
+<!--            text: 'Welcome back!'-->
+<!--        });-->
+<!--    }-->
+
+<!--    // Nếu có tham số logout=true, hiển thị popup thông báo đăng xuất thành công-->
+<!--    if (logout === 'true') {-->
+<!--        Swal.fire({-->
+<!--            icon: 'success',-->
+<!--            title: 'Log out successfully!',-->
+<!--            text: 'Log out successfully!'-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+
+<script>
+    // Check if the URL contains the parameter "signIn=true"
+    const urlParams = new URLSearchParams(window.location.search);
+    const signIn = urlParams.get('signin');
+
+    // If the signinSuccess parameter is set to 'true', display a success Swal popup
+    if (signIn === 'true') {
+        Swal.fire({
+            icon: 'success',
+            title: 'Login successfully!',
+            text: 'Welcome to the admin area!'
+        });
+    }
+</script>
+
+<script>
+    // Get the button:
+    let mybutton = document.getElementById("back-to-top");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+    // Lắng nghe sự kiện click của nút "back-to-top"
+    document.getElementById("back-to-top").addEventListener("click", function() {
+        // Cuộn lên đầu trang
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    });
+</script>

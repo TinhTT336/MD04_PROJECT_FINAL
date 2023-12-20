@@ -1,0 +1,334 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" data-layout="vertical" data-sidebar="dark" data-sidebar-size="lg"
+      data-preloader="disable" data-theme="default" data-topbar="light" data-bs-theme="light">
+
+<!-- Mirrored from themesbrand.com/steex/layouts/user-order-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Dec 2023 01:13:51 GMT -->
+<th:block th:insert="admin/layout/head.html"></th:block>
+<body>
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <!-- ========== App Menu ========== -->
+    <th:block th:insert="admin/layout/sidebar.html"></th:block>
+    <!-- Left Sidebar End -->
+    <!-- Vertical Overlay-->
+    <div class="vertical-overlay"></div>
+    <th:block th:insert="admin/layout/header.html"></th:block>
+
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <!--    <div class="main-content">-->
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Category Management</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-xl-7">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-4">
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="border-end-sm">
+                                            <div class="d-flex align-items-center gap-2 mb-4">
+                                                <div class="avatar-xs flex-shrink-0">
+                                                    <div class="avatar-title bg-body-secondary text-primary border border-primary-subtle rounded-circle">
+                                                        <i class="bi bi-file-earmark-text"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="text-muted mb-0">Total Categories</p>
+                                                </div>
+                                            </div>
+                                            <h3 class="mb-0"><span
+                                                    th:attr="data-th-target='${activeCategory+inactiveCategory}'"
+                                                    th:text="${activeCategory+inactiveCategory}"></span>
+                                                <small class="text-success fs-xs fw-normal ms-1"><i
+                                                        class="bi bi-arrow-up align-baseline"></i> 12.09%</small></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="border-end-lg">
+                                            <div class="d-flex align-items-center gap-2 mb-4">
+                                                <div class="avatar-xs flex-shrink-0">
+                                                    <div class="avatar-title bg-body-secondary text-success border border-success-subtle rounded-circle">
+                                                        <i class="bi bi-patch-check-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="text-muted mb-0">Active Categories</p>
+                                                </div>
+                                            </div>
+                                            <h3 class="mb-0"><span th:text="${activeCategory}"></span>
+                                                <small class="text-success fs-xs fw-normal ms-1"><i
+                                                        class="bi bi-arrow-up align-baseline"></i> 6.57%</small></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="">
+                                            <div class="d-flex align-items-center gap-2 mb-4">
+                                                <div class="avatar-xs flex-shrink-0">
+                                                    <div class="avatar-title bg-body-secondary text-warning border border-warning-subtle rounded-circle">
+                                                        <i class="bi bi-clock-history"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="text-muted mb-0">Inactive Categories</p>
+                                                </div>
+                                            </div>
+                                            <h3 class="mb-0"><span th:text="${inactiveCategory}"></span>
+                                                <small class="text-success fs-xs fw-normal ms-1"><i
+                                                        class="bi bi-arrow-up align-baseline"></i> 4.07%</small></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end card-->
+                    </div><!--end col-->
+                    <div class="col-xl-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex mb-4 pb-1">
+                                    <div class="flex-grow-1">
+                                        <h6 class="card-title">Total Categories <i
+                                                class="bi bi-exclamation-circle align-baseline ms-1 fs-sm"
+                                                data-bs-toggle="
+"></i>
+                                        </h6>
+                                        <p class="text-muted mb-0"><b th:text="${activeCategory+inactiveCategory}"></b>
+                                            Categories</p>
+                                    </div>
+                                </div>
+                                <div class="progress" data-bs-toggle="tooltip" data-bs-title="$234.95 Paid Amount">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end row-->
+
+                <div class="row" id="invoiceList">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="card-header">
+                                        <div class="row align-items-center gy-3">
+                                            <div class="col-lg-6 col-md-6">
+                                                <div class="search-box">
+                                                    <form th:action="@{/admin/category/{search-name}(search-name=${searchName})}"
+                                                          method="get">
+                                                        <input type="text" class="form-control search"
+                                                               placeholder="Search by category ID, category name, category status"
+                                                               name="search-name" th:value="${searchName}">
+                                                        <i class="ri-search-line search-icon"></i>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-auto ms-md-auto">
+                                                <div class="d-flex flex-wrap align-items-center gap-2">
+                                                    <div class="col-md-auto">
+                                                        <div class="hstack gap-2">
+                                                            <a th:href="@{/admin/category-add}">
+                                                                <button type="button"
+                                                                        class="btn btn-secondary btn-hover"><i
+                                                                        class="bi bi-plus-circle align-baseline me-1"
+                                                                ></i>
+                                                                    Add Category
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!--end row-->
+                            </div>
+                            <div th:if="${nameSearch!=null && totalCatSearch>0}" class="">
+                                <span class="italic">Found </span>
+                                <strong th:text="${totalCatSearch}" class=""> </strong>
+                                <span class="italic">results</span>
+                            </div>
+                            <div th:if="${message!=null}"
+                                 class="alertMessage alert alert-primary alert-dismissible fade show mt-4 ms-4 me-6 pe-5 w-50"
+                                 role="alert">
+                                <strong th:text="${message}"></strong>
+                            </div>
+                            <div th:if="${err!=null}"
+                                 class=" alertMessage alert alert-primary alert-dismissible fade show mt-4 ms-4 me-6 pe-5 w-50"
+                                 role="alert" id="alertMessage1">
+                                <strong th:text="${err}"></strong>
+                            </div>
+
+                            <div class="card-body mt-4 ms-4 me-4">
+                                <div class="table-responsive table-card">
+                                    <table class="table table-centered align-middle table-custom-effect table-nowrap mb-0 text-center table-hover">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="invoice_id">ID</th>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="customer_name">
+                                                Category Name
+                                            </th>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="status">Status</th>
+
+                                            <th scope="col" class="sort cursor-pointer" data-sort="create_date">Parent
+                                                Category
+                                            </th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list form-check-all" id="invoice-list-data">
+                                        <tr th:if="${categoryList.size()==0}">
+                                            <td colspan="7">
+                                                <div class="noresult">
+                                                    <div class="text-center py-4">
+                                                        <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                                                        <h5 class="mt-2">Dont't have any category!</h5>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr th:unless="${categoryList.size()==0}" th:each="category:${categoryList}">
+                                            <td th:text="${category.categoryId}"></td>
+                                            <td class="d-flex gap-1">
+                                                <div class="flex-shrink-0 me-2">
+                                                    <img class="avatar-xs rounded-circle customer-image-elem" alt=""
+                                                         th:src="@{|/uploads/images/${category.image}|}">
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span th:text="${#strings.length(category.categoryName) &gt; 20 ? #strings.substring(category.categoryName, 0, 20) + '...' : category.categoryName}"></span>
+                                                </div>
+                                            </td>
+                                            <td class="text-center"><span
+                                                    th:text="${category.categoryStatus?'Active':'Inactive'}"
+                                                    class="d-flex justify-content-center text-center badge w-50 m-auto"
+                                                    th:classappend="${category.categoryStatus?'bg-success-subtle text-success':'bg-danger-subtle text-danger'}"></span>
+                                            </td>
+                                            <td>
+                                                <span th:each="parent : ${parentCategories}"
+                                                      th:if="${parent.categoryId == category.parentId}"
+                                                      th:text="${parent.categoryName}"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <ul class="d-flex gap-2 list-unstyled mb-0 text-center justify-content-center">
+                                                    <li>
+                                                        <a th:href="@{/admin/category-edit/{categoryId}(categoryId=${category.categoryId})}"
+                                                           class="btn btn-subtle-secondary btn-icon btn-sm"
+                                                           data-bs-toggle="tooltip" title="Update Category"><i
+                                                                class="ph-pencil"></i></a>
+                                                    </li>
+                                                    <li><a onclick="return confirm('Are you sure to change status?')"
+                                                           th:href="@{/admin/category-delete/{categoryId}(categoryId=${category.categoryId})}"
+                                                           data-bs-toggle="tooltip"
+                                                           title="Change status"
+                                                           class="btn btn-subtle-danger btn-icon btn-sm"
+                                                    > <i class="ri-bold ri-swap-box-fill"></i>
+                                                    </a></li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                        </tbody><!-- end tbody -->
+                                    </table><!-- end table -->
+
+                                </div>
+                                <div th:if="${totalPage<=1}"></div>
+                                <div th:unless="${totalPage<=1}">
+                                    <div class="row align-items-center mt-4 pt-3 align-content-end justify-content-end"
+                                         id="pagination-element">
+                                        <div class="col-sm-auto mt-3 mt-sm-0 fixed-bottom">
+                                            <div class="pagination-wrap hstack justify-content-center gap-2">
+                                                <a class="page-item pagination-prev"
+                                                   th:href="@{${'/admin/category/' + (currentPage > 1 ? (currentPage - 1) : 1)}}"
+                                                   th:classappend="${i == 1 ? 'disabled' : ''}">
+                                                    Previous
+                                                </a>
+                                                <ul class="pagination listjs-pagination mb-0"
+                                                    th:each="i : ${#numbers.sequence(1, totalPage)}">
+                                                    <li th:classappend="${i==currentPage?'active':''}"><a th:text="${i}"
+                                                                                                          th:href="@{${'/admin/category/' + i}}"
+                                                                                                          class="page"></a>
+                                                    </li>
+                                                </ul>
+                                                <a class="page-item pagination-next"
+                                                   th:href="@{${'/admin/category/' + (currentPage < totalPage ? (currentPage + 1) : totalPage)}}"
+                                                   th:classappend="${i == totalPage ? 'disabled' : ''}">
+                                                    Next
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <th:block th:insert="admin/layout/footer.html"></th:block>
+    </div>
+
+</div>
+<!-- END layout-wrapper -->
+<!-- deleteRecordModal -->
+<div id="deleteRecordModal" class="modal fade zoomIn" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" id="deleteRecord-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-md-5">
+                <div class="text-center">
+                    <div class="text-danger">
+                        <i class="ri-bold ri-swap-box-fill display-5"></i>
+                    </div>
+                    <div class="mt-4">
+                        <h3 class="mb-2">Are you sure?</h3>
+                        <p class="text-muted fs-lg mx-3 mb-0">Are you sure you want to change this category's
+                            status?</p>
+                    </div>
+                </div>
+                <div class="d-flex gap-2 justify-content-center mt-4 mb-2">
+                    <button type="button" class="btn w-sm btn-light btn-hover" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn w-sm btn-danger btn-hover" id="delete-record">Yes, Change It!
+                    </button>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /deleteRecordModal -->
+
+<th:block th:insert="admin/layout/backtotop.html"></th:block>
+
+<!--preloader-->
+<th:block th:insert="admin/layout/preloader.html"></th:block>
+
+<!-- JAVASCRIPT -->
+<th:block th:insert="admin/layout/script.html"></th:block>
+
+
+</body>
+
+</html>

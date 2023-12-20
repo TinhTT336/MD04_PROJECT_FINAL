@@ -1,0 +1,152 @@
+<div class="app-menu navbar-menu">
+    <!-- LOGO -->
+    <div class="navbar-brand-box">
+        <a th:href="@{index.html}" class="logo logo-dark">
+            <span class="logo-sm">
+                <img th:src="@{/images/logo-sm.png}" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img th:src="@{/images/logo-dark.png}" alt="" height="22">
+            </span>
+        </a>
+        <a th:href="@{index.html}" class="logo logo-light">
+            <span class="logo-sm">
+                <img th:src="@{/images/logo-sm.png}" alt="" height="22">
+            </span>
+            <span class="logo-lg">
+                <img th:src="@{/images/logo-light.png}" alt="" height="22">
+            </span>
+        </a>
+        <button type="button" class="btn btn-sm p-0 fs-3xl header-item float-end btn-vertical-sm-hover"
+                id="vertical-hover">
+            <i class="ri-record-circle-line"></i>
+        </button>
+    </div>
+
+    <div id="scrollbar" data-simplebar="init" class="h-100 simplebar-scrollable-y">
+        <div class="simplebar-wrapper" style="margin: 0px;">
+            <div class="simplebar-height-auto-observer-wrapper">
+                <div class="simplebar-height-auto-observer"></div>
+            </div>
+            <div class="simplebar-mask">
+                <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                    <div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content"
+                         style="height: 100%; overflow: hidden scroll;">
+                        <div class="simplebar-content" style="padding: 0px;">
+                            <div class="container-fluid">
+
+                                <div id="two-column-menu">
+                                </div>
+                                <ul class="navbar-nav" id="navbar-nav" data-simplebar="init">
+                                    <div class="simplebar-wrapper" style="margin: 0px;">
+                                        <div class="simplebar-height-auto-observer-wrapper">
+                                            <div class="simplebar-height-auto-observer"></div>
+                                        </div>
+                                        <div class="simplebar-mask">
+                                            <div class="simplebar-offset" style="right: 0px; bottom: 0px;">
+                                                <div class="simplebar-content-wrapper" tabindex="0" role="region"
+                                                     aria-label="scrollable content"
+                                                     style="height: auto; overflow: hidden;">
+                                                    <div class="simplebar-content" style="padding: 0px;">
+                                                        <li class="nav-item">
+                                                            <a th:href="@{/admin}" class="nav-link menu-link"
+                                                               th:classappend="${#httpServletRequest.requestURI == '/admin' ? 'active' : ''}">
+                                                                <i class="bi bi-columns-gap fs-3"></i>
+                                                                <span data-key="t-dashboards">Dashboard</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a th:href="@{/admin/category}" class="nav-link menu-link"
+                                                               th:classappend="${#httpServletRequest.requestURI.startsWith('/admin/category')  ? 'active' : ''}">
+                                                                <i class="ph-gauge fs-3"></i>
+                                                                <span
+                                                                        data-key="t-file-manager">Category Management</span>
+                                                            </a>
+                                                        </li>
+
+                                                        <li class="nav-item">
+                                                            <a th:href="@{/admin/product}" class="nav-link menu-link"
+                                                               th:classappend="${#httpServletRequest.requestURI.startsWith('/admin/product') ? 'active' : ''}">
+                                                                <i class="ph-folder-open fs-3"></i> <span
+                                                                    data-key="t-file-manager">Product Management</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a th:href="@{/admin/order}" class="nav-link menu-link"
+                                                               th:classappend="${#httpServletRequest.requestURI.startsWith('/admin/order')  ? 'active' : ''}">
+                                                                <i class="ph-file-text fs-3"></i> <span
+                                                                    data-key="t-file-manager">Order Management</span>
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a th:href="@{/admin/user}" class="nav-link menu-link"
+                                                               th:classappend="${#httpServletRequest.requestURI.startsWith('/admin/user')  ? 'active' : ''}">
+                                                                <i class="ph-user-circle fs-3"></i> <span
+                                                                    data-key="t-authentication">User Management</span>
+                                                            </a>
+                                                        </li>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="simplebar-placeholder" style="width: 249px; height: 1364px;"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+                                        <div class="simplebar-scrollbar"
+                                             style="width: 0px; display: none; transform: translate3d(0px, 0px, 0px);"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-vertical" style="visibility: hidden;">
+                                        <div class="simplebar-scrollbar" style="height: 0px; display: none;"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-horizontal">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-vertical">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-horizontal">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-vertical">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-horizontal">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-vertical">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-horizontal">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-vertical">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-horizontal">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                    <div class="simplebar-track simplebar-vertical">
+                                        <div class="simplebar-scrollbar"></div>
+                                    </div>
+                                </ul>
+                            </div>
+                            <!-- Sidebar -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="simplebar-placeholder" style="width: 249px; height: 1364px;"></div>
+        </div>
+        <div class="simplebar-track simplebar-horizontal" style="visibility: hidden;">
+            <div class="simplebar-scrollbar"
+                 style="width: 0px; display: none; transform: translate3d(0px, 0px, 0px);"></div>
+        </div>
+        <div class="simplebar-track simplebar-vertical" style="visibility: visible;">
+            <div class="simplebar-scrollbar"
+                 style="height: 159px; transform: translate3d(0px, 0px, 0px); display: block;"></div>
+        </div>
+    </div>
+
+    <div class="sidebar-background"></div>
+</div>

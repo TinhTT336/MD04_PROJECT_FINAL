@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from demo-egenslab.b-cdn.net/html/beautico/preview/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Dec 2023 01:28:41 GMT -->
+<th:block th:insert="client/layout/head.html"></th:block>
+<th:block th:insert="admin/layout/head.html"></th:block>
+
+<body>
+<th:block th:insert="client/layout/topbar.html"></th:block>
+<th:block th:insert="client/layout/header.html"></th:block>
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Account</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="dashboard-section mt-110 mb-110">
+    <div class="container">
+        <form th:action="@{/profile/edit-profile}" method="post" th:object="${user}" enctype="multipart/form-data">
+<!--            <input type="hidden" th:value="*{userId}" name="userId">-->
+            <div class="row g-4">
+
+                <div class="col-xxl-3">
+                    <div class="card overflow-hidden">
+                        <div>
+                            <img th:src="@{/images/small/img-7.jpg}" alt=""
+                                 class="card-img-top profile-wid-img object-fit-cover" style="height: 200px;">
+                        </div>
+                        <div class="card-body pt-0 mt-n5">
+                            <div class="text-center">
+                                <div class="profile-user position-relative d-inline-block mx-auto">
+                                    <img th:src="@{|/uploads/images/${user.avatar}|}" th:field="*{avatar}" id="profile-img"
+                                         class="avatar-lg rounded-circle object-fit-cover border-0 img-thumbnail user-profile-image">
+                                    <div class="avatar-xs p-0 rounded-circle profile-photo-edit position-absolute end-0 bottom-0">
+                                        <input id="profile-img-file-input" type="file"
+                                               class="profile-img-file-input d-none" name="img">
+                                        <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                                    <span class="avatar-title rounded-circle bg-light text-body">
+                                                        <i class="bi bi-camera"></i>
+                                                    </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h5 th:text="${user.username}"> <i
+                                            class="bi bi-patch-check-fill align-baseline text-info ms-1"></i></h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body border-top">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="flex-grow-1">
+                                    <h5 class="card-title mb-0">Portfolio</h5>
+                                </div>
+                            </div>
+                            <div class="mb-3 d-flex">
+                                <div class="avatar-xs d-block flex-shrink-0 pe-2">
+                                            <span class="avatar-title rounded-circle bg-dark-subtle text-dark">
+                                                <i class="bi bi-github"></i>
+                                            </span>
+                                </div>
+                                <input type="email" class="form-control" id="gitUsername" th:value="${user.email}">
+                            </div>
+                            <div class="mb-3 d-flex">
+                                <div class="avatar-xs d-block flex-shrink-0 pe-2">
+                                            <span class="avatar-title rounded-circle bg-primary-subtle text-primary">
+                                                <i class="bi bi-facebook"></i>
+                                            </span>
+                                </div>
+                                <input type="text" class="form-control" id="websiteInput"
+                                       th:value="${user.phone}">
+                            </div>
+                            <div class="mb-3 d-flex">
+                                <div class="avatar-xs d-block flex-shrink-0 pe-2">
+                                            <span class="avatar-title rounded-circle bg-success-subtle text-success">
+                                                <i class="bi bi-dribbble"></i>
+                                            </span>
+                                </div>
+                                <input type="text" class="form-control" id="dribbleName" th:value="${user.address}">
+                            </div>
+                            <div class="d-flex">
+                                <div class="avatar-xs d-block flex-shrink-0 pe-2">
+                                            <span class="avatar-title rounded-circle bg-danger-subtle text-danger">
+                                                <i class="bi bi-instagram"></i>
+                                            </span>
+                                </div>
+                                <input type="text" class="form-control" id="pinterestName" th:value="${user.userStatus?'Active':'Blocked'}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-9">
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="d-flex align-items-center flex-wrap gap-2 mb-4">
+                            <ul class="nav nav-pills arrow-navtabs nav-secondary gap-2 flex-grow-1 order-2 order-lg-1" role="tablist">
+                                <li class="nav-item rounded-3" role="presentation">
+                                    <a class="nav-link "  th:href="@{/order-history}" role="tab" aria-selected="false" tabindex="-1">
+                                        <i class="lar la-user"></i> My Order
+                                    </a>
+                                </li>
+                                <li class="nav-item rounded-3" role="presentation">
+                                    <a class="nav-link "  th:href="@{/profile/change-password}" role="tab" aria-selected="true">
+                                        <i class="bi bi-pencil-square align-baseline me-1"></i>  Change Password
+                                    </a>
+                                </li>
+                                <li class="nav-item rounded-3" role="presentation">
+                                    <a class="nav-link active"  th:href="@{/profile/edit-profile}" role="tab" aria-selected="false" tabindex="-1">
+                                        <i class="bi bi-pencil-square align-baseline me-1"></i>  Edit Profile
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                        <div class="">
+                            <div class="dashboard-profile">
+                                <div class="table-title-area">
+                                    <h3>Edit Your Profile</h3>
+                                </div>
+                                <div th:if="${message!=null}"
+                                     class="alertMessage alert alert-success alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                     role="alert">
+                                    <strong th:text="${message}"></strong>
+                                </div>
+                                <div class="form-wrapper">
+                                    <div class="row">
+                                        <div class="col-xl-6 col-lg-12 col-md-6 mb-25 pe-2">
+                                            <div class="form-inner">
+                                                <label><p>Username:</p></label>
+                                                <input type="text" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'border-danger' : ''">
+                                                <div th:if="${#fields.hasErrors('username')}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:errors="*{username}"></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 col-lg-12 col-md-6 mb-25">
+                                            <div class="form-inner">
+                                                <label><p>Phone:</p></label>
+                                                <input type="text" th:field="*{phone}" th:classappend="${#fields.hasErrors('phone')} ? 'border-danger' : ''">
+                                                <div th:if="${#fields.hasErrors('phone')}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:errors="*{phone}"></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-25">
+                                            <div class="form-inner">
+                                                <label><p>Email:</p></label>
+                                                <input type="text" th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? 'border-danger' : ''">
+                                                <div th:if="${#fields.hasErrors('email')}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:errors="*{email}"></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-25">
+                                            <div class="form-inner">
+                                                <label><p>Address:</p></label>
+                                                <input type="text" th:field="*{address}" th:classappend="${#fields.hasErrors('address')} ? 'border-danger' : ''">
+                                                <div th:if="${#fields.hasErrors('address')}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:errors="*{address}"></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 mb-25">
+                                            <div class="form-inner">
+                                                <label><p>Password:</p></label>
+                                                <input type="password" name="password" id="password4"
+                                                       placeholder="Enter Password" th:classappend="${#fields.hasErrors('password')} ? 'border-danger' : ''"/>
+                                                <i class="bi bi-eye-slash" id="togglePassword4"></i>
+                                                <div th:if="${#fields.hasErrors('password')}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:errors="*{password}"></strong>
+                                                </div>
+                                                <div th:if="${errPassword!=null}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:text="${errPassword}"></strong>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="button-group">
+                                                <button type="submit"
+                                                        class="primary-btn3 black-bg  hover-btn5 hover-white">Update
+                                                    Profile
+                                                </button>
+                                                <a href=""><button class="primary-btn3 hover-btn5">Cancel</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<th:block th:insert="client/layout/footer.html"></th:block>
+<th:block th:insert="client/layout/back-to-top.html"></th:block>
+<th:block th:insert="client/layout/script.html"></th:block>
+<script>
+    // Tự động ẩn thông báo sau 15 giây
+    setTimeout(function () {
+        document.getElementById("alertMessage").style.display = "none";
+    }, 4000);
+</script>
+
+<script>
+    // Lắng nghe sự kiện khi người dùng chọn tệp tin
+    document.getElementById("profile-img-file-input").addEventListener("change", function(event) {
+        // Lấy đối tượng tệp tin đã chọn
+        var file = event.target.files[0];
+
+        // Kiểm tra xem người dùng đã chọn tệp tin hay chưa
+        if (file) {
+            // Tạo một đối tượng FileReader để đọc dữ liệu từ tệp tin
+            var reader = new FileReader();
+
+            // Định nghĩa sự kiện khi đọc tệp tin hoàn tất
+            reader.onload = function(e) {
+                // Gán dữ liệu đọc được từ tệp tin vào thuộc tính 'src' của thẻ img
+                document.getElementById("profile-img").src = e.target.result;
+            };
+
+            // Đọc dữ liệu từ tệp tin
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+</body>
+
+</html>

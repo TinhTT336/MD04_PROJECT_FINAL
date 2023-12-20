@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="client/layout/head.html"></th:block>
+<style>
+    .category-card-img img{
+        width: 280px !important;
+        height: 240px !important;
+        object-fit: cover;
+    }
+</style>
+
+<body>
+
+<th:block th:insert="client/layout/topbar.html"></th:block>
+<th:block th:insert="client/layout/header.html"></th:block>
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Category</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+
+<div class="category-section mt-110 mb-110">
+    <div class="container">
+        <div class="category-section-title mb-70">
+            <p>EXPLORE</p>
+            <h1>Category</h1>
+        </div>
+        <div class="row g-4 mb-60">
+            <div class="col-lg-3 col-sm-6 mb-50" th:each="category:${categoryList}">
+                <div class="category-card">
+                    <div class="category-card-img hover-img">
+                        <a th:href="@{/product-by-category/{id}(id=${category.categoryId})}"><img th:src="@{|/uploads/images/${category.image}|}" alt></a>
+                    </div>
+                    <div class="category-card-content">
+                        <a th:href="@{/product-by-category/{id}(id=${category.categoryId})}" th:text="${category.categoryName}"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+<!--        <div class="row g-4 mb-70">-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="category-card">-->
+<!--                    <div class="category-card-img hover-img">-->
+<!--                        <a href="shop-list.html"><img src="assets/img/inner-page/category-img5.png" alt></a>-->
+<!--                    </div>-->
+<!--                    <div class="category-card-content">-->
+<!--                        <a href="shop-list.html">Makeup</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="category-card">-->
+<!--                    <div class="category-card-img hover-img">-->
+<!--                        <a href="shop-list.html"><img src="assets/img/inner-page/category-img6.png" alt></a>-->
+<!--                    </div>-->
+<!--                    <div class="category-card-content">-->
+<!--                        <a href="shop-list.html">Fragrance</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="category-card">-->
+<!--                    <div class="category-card-img hover-img">-->
+<!--                        <a href="shop-list.html"> <img src="assets/img/inner-page/category-img7.png" alt></a>-->
+<!--                    </div>-->
+<!--                    <div class="category-card-content">-->
+<!--                        <a href="shop-list.html">Accessories</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-lg-3 col-sm-6">-->
+<!--                <div class="category-card">-->
+<!--                    <div class="category-card-img hover-img">-->
+<!--                        <a href="shop-list.html"><img src="assets/img/inner-page/category-img8.png" alt></a>-->
+<!--                    </div>-->
+<!--                    <div class="category-card-content">-->
+<!--                        <a href="shop-list.html">Men Fashion</a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="load-more-btn">
+            <a href class="primary-btn1 hover-btn3">*Load More*</a>
+        </div>
+    </div>
+</div>
+
+<th:block th:insert="client/layout/footer.html"></th:block>
+<th:block th:insert="client/layout/back-to-top.html"></th:block>
+<th:block th:insert="client/layout/script.html"></th:block>
+
+</body>
+
+</html>

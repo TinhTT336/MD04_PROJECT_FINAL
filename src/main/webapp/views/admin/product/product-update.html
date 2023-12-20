@@ -1,0 +1,315 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" data-layout="vertical" data-sidebar="dark" data-sidebar-size="lg"
+      data-preloader="disable" data-theme="default" data-topbar="light" data-bs-theme="light">
+<th:block th:insert="admin/layout/head.html"></th:block>
+<style>
+    #customer-img {
+        width: 375px;
+        height: 215px !important;
+        object-fit: cover;
+    }
+</style>
+
+<body>
+<!-- Begin page -->
+<div id="layout-wrapper">
+    <!-- ========== App Menu ========== -->
+    <th:block th:insert="admin/layout/sidebar.html"></th:block>
+    <!-- Left Sidebar End -->
+    <!-- Vertical Overlay-->
+    <div class="vertical-overlay"></div>
+    <th:block th:insert="admin/layout/header.html"></th:block>
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">Update Product</h4>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a th:href="@{/admin/product}">Product</a></li>
+                                    <li class="breadcrumb-item active">Update Product</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form th:action="@{/admin/product/product-edit}" th:object="${product}" method="post"
+                                      enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-xxl-5">
+                                            <label class="form-label">Product Images <span
+                                                    class="text-danger">*</span></label>
+
+                                            <div class="text-center dropzone mb-3 d-flex justify-content-center align-items-center" th:classappend="${#fields.hasErrors('image')} ? 'border-danger' : ''">
+                                                <div class="position-relative d-inline-block">
+                                                    <div class="position-absolute top-100 start-100 translate-middle">
+                                                        <label for="imgInp" class="mb-0"
+                                                               data-bs-toggle="tooltip" data-bs-placement="right"
+                                                               title="Select product image">
+                                                              <span class="avatar-xs d-inline-block">
+                                                                 <span class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                                                   <i class="ri-image-fill"></i>
+                                                                 </span>
+                                                              </span>
+                                                        </label>
+                                                        <input class="form-control d-none" id="imgInp" type="file"
+                                                               name="img" onchange="showImage(this)">
+                                                        <input type="hidden" th:field="*{image}">
+                                                    </div>
+                                                </div>
+                                                <div class="py-3">
+                                                    <img th:src="@{|/uploads/images/${product.image}|}" alt=""
+                                                         id="customer-img"
+                                                         class=" h-auto rounded-3 border object-fit-cover"
+                                                         width="85%" height="65%">
+                                                </div>
+                                            </div>
+
+                                            <div th:if="${#fields.hasErrors('image')}"
+                                                 class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                 role="alert">
+                                                <strong th:errors="*{image}"></strong>
+                                            </div>
+
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Gallery Images </label>
+                                                <div class="border-light" id="dropzone">
+                                                    <div class="fallback ">
+                                                        <input type="file" multiple="multiple"
+                                                               name="imgs" onchange="loadFiles(event)">
+                                                    </div>
+                                                </div>
+                                                <ul class="list-unstyled mb-0 row" id="dropzone-preview2">
+                                                        <li class="mt-2 col-lg-6 rounded" id="dropzone-preview-list2" th:each="img : ${imageList}">
+                                                            <div class="text-center border border-dashed mb-3 d-flex flex-wrap justify-content-center align-items-center">
+                                                                <img th:if="${img != null}" th:src="@{|/uploads/images/${img.src}|}" alt=""
+                                                                     id="customer-img1"
+                                                                     class="py-1 h-auto rounded-3 object-fit-cover" width="85%" height="65%">
+                                                            </div>
+                                                        </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-7">
+                                            <div class="mb-3">
+                                                <label class="form-label">Product ID</label>
+                                                <input type="text" class="form-control" th:field="*{productId}"
+                                                       readonly>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Product Name</label>
+                                                <input type="text" class="form-control" th:field="*{productName}">
+                                                <div th:if="${#fields.hasErrors('productName')}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:errors="*{productName}"></strong>
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="productBrand" class="form-label">Price </label>
+                                                        <input type="text" class="form-control" id="productBrand" th:field="*{price}">
+<!--                                                        th:field="'$' + *{#numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"-->
+                                                        <div th:if="${#fields.hasErrors('price')}"
+                                                             class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                             role="alert">
+                                                            <strong th:errors="*{price}"></strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Stock</label>
+                                                        <input type="text" class="form-control" th:field="*{stock}">
+                                                        <div th:if="${#fields.hasErrors('stock')}"
+                                                             class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                             role="alert">
+                                                            <strong th:errors="*{stock}"></strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Description</label>
+                                                <textarea class="form-control" th:field="*{description}" rows="10"></textarea>
+                                                <div th:if="${#fields.hasErrors('description')}"
+                                                     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 me-6 pe-5 w-100"
+                                                     role="alert">
+                                                    <strong th:errors="*{description}"></strong>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Brand</label>
+                                                        <input type="text" class="form-control" th:field="*{brand}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <label for="productCategories" class="form-label"> Category
+                                                            Name<span
+                                                                    class="text-danger">*</span></label>
+                                                        <select class="form-control" data-choices
+                                                                th:field="*{category.categoryId}"
+                                                                id="productCategories">
+                                                            <option th:each="cat:${categoryList}"
+                                                                    th:text="${cat.categoryName}"
+                                                                    th:value="${cat.categoryId}" class="mb-3"></option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="mb-3 d-flex flex-column">
+                                                <label class="form-label">Product Status </label>
+                                                <div class="ms-3 d-flex gap-4">
+                                                    <div class="form-check form-radio-success mb-3">
+                                                        <input class="form-check-input" type="radio"
+                                                               th:field="*{productStatus}" value="true"
+                                                               th:checked="${product.productStatus?'checked':''}"
+                                                               disabled>
+                                                        <label class="form-check-label">
+                                                            Active
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check form-radio-secondary mb-3">
+                                                        <input class="form-check-input" type="radio"
+                                                               th:field="*{productStatus}" value="false"
+                                                               th:checked="${!product.productStatus?'checked':''}"
+                                                               disabled>
+                                                        <label class="form-check-label">
+                                                            Inactive
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                            <div class="hstack gap-2 justify-content-end mb-3">
+                                                <a th:href="@{/admin/product}">
+                                                    <button class="btn btn-danger" type="button"><i
+                                                            class="ph-x align-middle"></i>
+                                                        Cancel
+                                                    </button>
+                                                </a>
+                                                <button type="submit" class="btn btn-secondary">Update</button>
+                                            </div>
+                                        </div><!--end col-->
+                                    </div><!--end row-->
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+        <th:block th:insert="admin/layout/footer.html"></th:block>
+    </div>
+    <!-- end main content-->
+</div>
+<!-- END layout-wrapper -->
+
+<!--start back-to-top-->
+<th:block th:insert="admin/layout/backtotop.html"></th:block>
+
+<!--preloader-->
+<th:block th:insert="admin/layout/preloader.html"></th:block>
+
+<!-- JAVASCRIPT -->
+<th:block th:insert="admin/layout/script.html"></th:block>
+<script>
+
+    function handleInputImage() {
+        // Lấy đối tượng input file
+        var inputElement = document.querySelector('input[type="file"]');
+
+        // Kiểm tra xem người dùng đã chọn file hay chưa
+        if (inputElement.files && inputElement.files[0]) {
+            var fileReader = new FileReader();
+
+            // Đọc nội dung của file
+            fileReader.onload = function (e) {
+                // Lấy dữ liệu file đã được đọc
+                var fileContent = e.target.result;
+
+                // Gán dữ liệu file vào ô input hidden
+                document.getElementById('imageChoose').value = fileContent;
+            };
+
+            // Đọc file làm dữ liệu đầu vào
+            fileReader.readAsDataURL(inputElement.files[0]);
+        }
+    }
+    function showImage(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                document.getElementById('customer-img').setAttribute('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function loadFiles(event) {
+        var files = event.target.files;
+        var previewContainer = document.getElementById('dropzone-preview2');
+        previewContainer.innerHTML = '';
+
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('py-1', 'h-auto', 'rounded-3', 'object-fit-cover');
+                img.style.width = '90%';
+                img.style.height = '90%';
+
+                var li = document.createElement('li');
+                li.classList.add('mt-2', 'col-lg-6', 'rounded');
+                li.appendChild(img);
+
+                previewContainer.appendChild(li);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+
+</script>
+<script>
+    // Tự động ẩn thông báo sau 15 giây
+    setTimeout(function () {
+        var elements = document.getElementsByClassName("alertMessage");
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.display = "none";
+        }
+    }, 5000);
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Mirrored from demo-egenslab.b-cdn.net/html/beautico/preview/my-account.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Dec 2023 01:28:41 GMT -->
+<th:block th:insert="client/layout/head.html"></th:block>
+<th:block th:insert="admin/layout/head.html"></th:block>
+
+<body>
+<th:block th:insert="client/layout/topbar.html"></th:block>
+<th:block th:insert="client/layout/header.html"></th:block>
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Account</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="dashboard-section mt-110 mb-110">
+    <div class="container">
+        <div class="row g-4">
+
+            <div class="col-xxl-3">
+                <div class="card overflow-hidden">
+                    <div>
+                        <img th:src="@{/images/small/img-7.jpg}" alt=""
+                             class="card-img-top profile-wid-img object-fit-cover" style="height: 200px;">
+                    </div>
+                    <div class="card-body pt-0 mt-n5">
+                        <div class="text-center">
+                            <div class="profile-user position-relative d-inline-block mx-auto">
+                                <img th:src="@{|/uploads/images/${user.avatar}|}" alt=""
+                                     class="avatar-lg rounded-circle object-fit-cover border-0 img-thumbnail user-profile-image">
+                                <div class="avatar-xs p-0 rounded-circle profile-photo-edit position-absolute end-0 bottom-0">
+                                    <input id="profile-img-file-input" type="file"
+                                           class="profile-img-file-input d-none">
+                                    <label for="profile-img-file-input" class="profile-photo-edit avatar-xs">
+                                                    <span class="avatar-title rounded-circle bg-light text-body">
+                                                        <i class="bi bi-camera"></i>
+                                                    </span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h5 th:text="${user.username}"><i
+                                        class="bi bi-patch-check-fill align-baseline text-info ms-1"></i></h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body border-top">
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="flex-grow-1">
+                                <h5 class="card-title mb-0">Portfolio</h5>
+                            </div>
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                            <span class="avatar-title rounded-circle bg-dark-subtle text-dark">
+                                                <i class="bi bi-github"></i>
+                                            </span>
+                            </div>
+                            <input type="email" class="form-control" id="gitUsername" th:value="${user.email}">
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                            <span class="avatar-title rounded-circle bg-primary-subtle text-primary">
+                                                <i class="bi bi-facebook"></i>
+                                            </span>
+                            </div>
+                            <input type="text" class="form-control" id="websiteInput" th:value="${user.address}">
+                        </div>
+                        <div class="mb-3 d-flex">
+                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                            <span class="avatar-title rounded-circle bg-success-subtle text-success">
+                                                <i class="bi bi-dribbble"></i>
+                                            </span>
+                            </div>
+                            <input type="text" class="form-control" id="dribbleName" th:value="${user.address}">
+                        </div>
+                        <div class="d-flex">
+                            <div class="avatar-xs d-block flex-shrink-0 me-3">
+                                            <span class="avatar-title rounded-circle bg-danger-subtle text-danger">
+                                                <i class="bi bi-instagram"></i>
+                                            </span>
+                            </div>
+                            <input type="text" class="form-control" id="pinterestName"
+                                   th:value="${user.userStatus?'Active':'Blocked'}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-9">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="d-flex align-items-center flex-wrap gap-2 mb-4">
+                        <ul class="nav nav-pills arrow-navtabs nav-secondary gap-2 flex-grow-1 order-2 order-lg-1"
+                            role="tablist">
+                            <li class="nav-item rounded-3" role="presentation">
+                                <a class="nav-link active"  th:href="@{/order-history}" role="tab"
+                                   aria-selected="false" tabindex="-1">
+                                    <i class="lar la-user"></i> My Order
+                                </a>
+                            </li>
+                            <li class="nav-item rounded-3" role="presentation">
+                                <a class="nav-link "  th:href="@{/profile/change-password}"
+                                   role="tab" aria-selected="true">
+                                    <i class="bi bi-pencil-square align-baseline me-1"></i> Change Password
+                                </a>
+                            </li>
+                            <li class="nav-item rounded-3" role="presentation">
+                                <a class="nav-link"  th:href="@{/profile/edit-profile}" role="tab"
+                                   aria-selected="false" tabindex="-1">
+                                    <i class="bi bi-pencil-square align-baseline me-1"></i> Edit Profile
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:if="${message!=null}"
+                         class="alertMessage alert alert-primary alert-dismissible fade show mt-4 me-6 pe-5 w-50"
+                         role="alert" id="alertMessage">
+                        <strong th:text="${message}"></strong>
+                    </div>
+
+                    <div>
+                        <div class="table-title-area">
+                            <h3>My Order</h3>
+                            <select>
+                                <option value="01">Show: Last 05 Order</option>
+                                <option value="02">Show: Last 03 Order</option>
+                                <option value="03">Show: Last 15 Order</option>
+                                <option value="04">Show: Last 20 Order</option>
+                            </select>
+                        </div>
+
+                        <div class="table-wrapper">
+                            <table class="eg-table order-table table mb-0">
+                                <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Order Date</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="order:${orders}">
+                                    <td data-label="Order ID" th:text="${order.orderId}"></td>
+                                    <td data-label="Product Details" th:text="${order.order_at}"></td>
+                                    <td data-label="price" th:text="${#numbers.formatDecimal(order.orderTotal, 0, 'COMMA', 0, 'POINT') + ' $'}"></td>
+                                    <td data-label="Status" th:classappend="${order.orderStatus == 0 ? 'text-green' : (order.orderStatus == 1 ? 'text-primary' : 'text-danger')}"
+                                        th:text="${order.orderStatus == 0 ? 'Pending' : (order.orderStatus == 1 ? 'Confirmed' : 'Cancel')}"></td>
+                                    <td>
+                                        <a th:href="@{/order-show/{id}(id=${order.orderId})}" class="delete-icon cursor-pointer view-item-btn hover-img" data-bs-toggle="tooltip"
+                                           data-bs-title="View OrderDetail"><i
+                                                class="bi bi-info-circle align-bottom me-2 text-primary cursor-pointer "></i></a>
+                                        <a th:if="${order.orderStatus==0}" th:href="@{/order-cancel/{id}(id=${order.orderId})}" class="delete-icon cursor-pointer edit-item-btn hover-img" data-bs-toggle="tooltip"
+                                           title="Cancel Order"><i class="bi bi-x-lg text-danger cursor-pointer"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="table-pagination d-flex justify-content-end">
+                            <nav class="shop-pagination">
+                                <ul class="pagination-list">
+                                    <li>
+                                        <a href="#" class="shop-pagi-btn"><i class="bi bi-chevron-left"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="shop-pagi-btn"><i class="bi bi-chevron-right"></i></a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<th:block th:insert="client/layout/footer.html"></th:block>
+<th:block th:insert="client/layout/back-to-top.html"></th:block>
+<th:block th:insert="client/layout/script.html"></th:block>
+
+</body>
+
+</html>

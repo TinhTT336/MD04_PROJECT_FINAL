@@ -1,0 +1,298 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" data-layout="vertical" data-sidebar="dark" data-sidebar-size="lg"
+      data-preloader="disable" data-theme="default" data-topbar="light" data-bs-theme="light">
+
+<!-- Mirrored from themesbrand.com/steex/layouts/user-order-index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 05 Dec 2023 01:13:51 GMT -->
+<th:block th:insert="admin/layout/head.html"></th:block>
+<body>
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    <!-- ========== App Menu ========== -->
+    <th:block th:insert="admin/layout/sidebar.html"></th:block>
+    <!-- Left Sidebar End -->
+    <!-- Vertical Overlay-->
+    <div class="vertical-overlay"></div>
+    <th:block th:insert="admin/layout/header.html"></th:block>
+
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <!--    <div class="main-content">-->
+
+    <div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0">User Management</h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- end page title -->
+
+                <div class="row">
+                    <div class="col-xl-7">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row g-4">
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="border-end-sm">
+                                            <div class="d-flex align-items-center gap-2 mb-4">
+                                                <div class="avatar-xs flex-shrink-0">
+                                                    <div class="avatar-title bg-body-secondary text-primary border border-primary-subtle rounded-circle">
+                                                        <i class="bi bi-file-earmark-text"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="text-muted mb-0">Total Users</p>
+                                                </div>
+                                            </div>
+                                            <h3 class="mb-0"><span  th:attr="data-th-target='${activeUser+blockedUser}'"
+                                                                   th:text="${activeUser+blockedUser}"></span>
+                                                <small class="text-success fs-xs fw-normal ms-1"><i
+                                                        class="bi bi-arrow-up align-baseline"></i> 12.09%</small></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="border-end-lg">
+                                            <div class="d-flex align-items-center gap-2 mb-4">
+                                                <div class="avatar-xs flex-shrink-0">
+                                                    <div class="avatar-title bg-body-secondary text-success border border-success-subtle rounded-circle">
+                                                        <i class="bi bi-patch-check-fill"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="text-muted mb-0">Active Users</p>
+                                                </div>
+                                            </div>
+                                            <h3 class="mb-0"><span  th:attr="data-th-target='${activeUser}'"
+                                                                   th:text="${activeUser}"></span>
+                                                <small class="text-success fs-xs fw-normal ms-1"><i
+                                                        class="bi bi-arrow-up align-baseline"></i> 6.57%</small></h3>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-sm-6">
+                                        <div class="">
+                                            <div class="d-flex align-items-center gap-2 mb-4">
+                                                <div class="avatar-xs flex-shrink-0">
+                                                    <div class="avatar-title bg-body-secondary text-warning border border-warning-subtle rounded-circle">
+                                                        <i class="bi bi-clock-history"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <p class="text-muted mb-0">Blocked Users</p>
+                                                </div>
+                                            </div>
+                                            <h3 class="mb-0"><span  th:attr="data-th-target='${blockedUser}'"
+                                                                   th:text="${blockedUser}"></span>
+                                                <small class="text-success fs-xs fw-normal ms-1"><i
+                                                        class="bi bi-arrow-up align-baseline"></i> 4.07%</small></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--end card-->
+                    </div><!--end col-->
+                    <div class="col-xl-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex mb-4 pb-1">
+                                    <div class="flex-grow-1">
+                                        <h6 class="card-title">Total Users <i
+                                                class="bi bi-exclamation-circle align-baseline ms-1 fs-sm"
+                                                data-bs-toggle="
+"></i>
+                                        </h6>
+                                        <p class="text-muted mb-0"><b th:text="${activeUser+blockedUser}"></b> Users</p>
+                                    </div>
+                                </div>
+                                <div class="progress" data-bs-toggle="tooltip" data-bs-title="$234.95 Paid Amount">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                         style="width: 75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end row-->
+
+                <div class="row" id="invoiceList">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row align-items-center">
+                                    <div class="card-header">
+                                        <form th:action="@{/admin/user/{search}(search=${searchName})}" method="get">
+                                            <div class="row align-items-center gy-3 d-flex flex-row">
+                                                <div class="col-lg-4 col-md-6">
+                                                    <div class="search-box">
+                                                        <input type="text" class="form-control search" name="search" th:value="${searchName}"
+                                                               placeholder="Search by user ID, username or gmail">
+                                                        <i class="ri-search-line search-icon"></i>
+                                                    </div>
+                                                </div>
+                                                <div th:if="${nameSearch!=null&&totalUserSearch>0}" class="col-lg-4 col-md-6">
+                                                    <span class="italic">Found </span>
+                                                    <strong th:text="${totalUserSearch}" class=""> </strong>
+                                                    <span class="italic">results</span>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div><!--end row-->
+                            </div>
+                            <div th:if="${message!=null}"
+                                 class="alert alert-primary alert-dismissible fade show mt-4 ms-4 me-6 pe-5 w-50"
+                                 role="alert" id="alertMessage">
+                                <strong th:text="${message}"></strong>
+                            </div>
+
+                            <div class="card-body mt-4 ms-4 me-4">
+                                <div class="table-responsive table-card">
+                                    <table class="table table-centered align-middle table-custom-effect table-nowrap mb-0 text-center table-hover">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="invoice_id">ID</th>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="customer_name">
+                                                Username
+                                            </th>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="invoice_id">Email
+                                            </th>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="invoice_id">Address
+                                            </th>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="invoice_id">Phone
+                                            </th>
+                                            <th scope="col" class="sort cursor-pointer" data-sort="invoice_id">Role</th>
+
+                                            <th scope="col" class="sort cursor-pointer" data-sort="status">Status</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody class="list form-check-all" id="invoice-list-data">
+                                        <tr th:if="${userList.size()==0}">
+                                            <td colspan="7"> <div class="noresult">
+                                                <div class="text-center py-4">
+                                                    <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                                                    <h5 class="mt-2">Sorry! No Result Found</h5>
+                                                    <p class="text-muted mb-0">We've searched more than 6+ user We did not
+                                                        find any user for you search.</p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr th:unless="${userList.size()==0}" th:each="user:${userList}">
+                                            <td th:text="${user.userId}"></td>
+                                            <td class="d-flex gap-1">
+                                                <div class="flex-shrink-0 me-2">
+                                                    <div>
+                                                        <img class="avatar-xs rounded-circle customer-image-elem" alt=""
+                                                             th:src="@{|/uploads/images/${user.avatar}|}">
+                                                    </div>
+                                                </div>
+                                                <div class="flex-grow-1">
+                                                    <span class="fs-base mb-0" th:text="${user.username}"></span>
+                                                </div>
+                                            </td>
+                                            <td th:text="${user.email}"></td>
+                                            <td th:text="${user.address}"></td>
+                                            <td th:text="${user.phone}"></td>
+                                            <td class="text-center"><span
+                                                    th:text="${user.role?'USER':'ADMIN'}"
+                                                    class="d-flex justify-content-center text-center badge w-50 m-auto"
+                                                    th:classappend="${user.role?'bg-success-subtle text-success':'bg-danger-subtle text-danger'}"></span>
+                                            </td>
+                                            <td class="text-center"><span
+                                                    th:text="${user.userStatus?'Active':'Blocked'}"
+                                                    class="d-flex justify-content-center text-center badge w-50 m-auto"
+                                                    th:classappend="${user.userStatus?'bg-success-subtle text-success':'bg-danger-subtle text-danger'}"></span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span th:if="${!user.role}"></span>
+                                                <span th:unless="${!user.role}">
+                                                <ul class="d-flex gap-2 list-unstyled mb-0 text-center justify-content-center">
+
+                                                         <li>
+                                                        <a onclick="return confirm('Are you sure to change status?')"
+                                                           th:href="@{/admin/user-change/{userId}(userId=${user.userId})}"
+                                                           class="btn btn-subtle-secondary btn-icon btn-sm"
+                                                           data-bs-toggle="tooltip" title="Change user's status"><i
+                                                                class="ph-pencil"></i></a>
+                                                    </li>
+                                                    <li><a onclick="return confirm('Are you sure to change status?')"
+                                                           th:href="@{/admin/user-set/{userId}(userId=${user.userId})}"
+                                                           data-bs-toggle="tooltip"
+                                                           title="Set user's role"
+                                                           class="btn btn-subtle-danger btn-icon btn-sm"
+                                                    > <i class="ri-bold ri-swap-box-fill"></i>
+                                                    </a></li>
+                                                </ul>
+                                                    </span>
+                                            </td>
+                                        </tr>
+                                        </tbody><!-- end tbody -->
+                                    </table><!-- end table -->
+                                    <div class="noresult" style="display: none">
+                                        <div class="text-center py-4">
+                                            <i class="ph-magnifying-glass fs-1 text-primary"></i>
+                                            <h5 class="mt-2">Don't have any user!</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div th:if="${totalPage<=1}"></div>
+                                <div th:unless="${totalPage<=1}">
+                                    <div class="row align-items-center mt-4 pt-3" id="pagination-element">
+                                        <div class="col-sm-auto mt-3 mt-sm-0 fixed-bottom">
+                                            <div class="pagination-wrap hstack justify-content-center gap-2">
+                                                <a class="page-item pagination-prev"
+                                                   th:href="@{${'/admin/user/' + (currentPage > 1 ? (currentPage - 1) : 1)}}"
+                                                   th:classappend="${i == 1 ? 'disabled' : ''}">
+                                                    <i class="bi bi-chevron-left"></i>
+                                                </a>
+                                                <ul class="pagination listjs-pagination mb-0"
+                                                    th:each="i : ${#numbers.sequence(1, totalPage)}">
+                                                    <li th:classappend="${i==currentPage?'active':''}"><a th:text="${i}"
+                                                                                                          th:href="@{${'/admin/user/' + i}}"
+                                                                                                          class="page"></a>
+                                                    </li>
+                                                </ul>
+                                                <a class="page-item pagination-next"
+                                                   th:href="@{${'/admin/user/' + (currentPage < totalPage ? (currentPage + 1) : totalPage)}}"
+                                                   th:classappend="${i == totalPage ? 'disabled' : ''}">
+                                                    <i class="bi bi-chevron-right"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+        <th:block th:insert="admin/layout/footer.html"></th:block>
+    </div>
+
+</div>
+<!-- END layout-wrapper -->
+
+<th:block th:insert="admin/layout/backtotop.html"></th:block>
+
+<!--preloader-->
+<th:block th:insert="admin/layout/preloader.html"></th:block>
+
+<!-- JAVASCRIPT -->
+<th:block th:insert="admin/layout/script.html"></th:block>
+
+</body>
+
+</html>

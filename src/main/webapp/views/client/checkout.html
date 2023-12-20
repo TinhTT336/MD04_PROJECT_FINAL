@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="client/layout/head.html"></th:block>
+
+<body>
+
+<th:block th:insert="client/layout/topbar.html"></th:block>
+<th:block th:insert="client/layout/header.html"></th:block>
+
+<div class="breadcrumb-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div th:if="${errQuantity!=null}"
+     class="alertMessage alert alert-danger alert-dismissible fade show mt-4 ms-4 me-6 pe-5 w-100"
+     role="alert">
+    <strong th:text="${errQuantity}"></strong>
+</div>
+
+<div class="checkout-section pt-110 mb-110">
+    <div class="container">
+        <form th:action="@{/checkout}" method="post" th:object="${user}">
+            <input type="hidden" name="action" value="checkout">
+            <div class="row gy-5">
+                <div th:if="${err!=null}"
+                     class="alertMessage alert alert-primary alert-dismissible fade show mt-4 ms-4 me-6 pe-5 w-50"
+                     role="alert">
+                    <strong th:text="${err}"></strong>
+                </div>
+                <div class="col-lg-7">
+                    <div class="form-wrap mb-30">
+                        <h4>Billing Details</h4>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-inner">
+                                    <label>Full Name <span class="text-danger"> *</span></label>
+                                    <input type="text" name="fname" th:field="*{username}" th:classappend="${#fields.hasErrors('username')} ? 'border-danger' : ''">
+                                    <div class="alert alert-danger alert-dismissible fade show mt-3 me-6 pe-5 w-100"
+                                         role="alert" th:if="${#fields.hasErrors('username')}">
+                                        <strong th:errors="*{username}"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-inner">
+                                    <label>Address <span class="text-danger"> *</span></label>
+                                    <input type="text" name="fname" th:field="*{address}" th:classappend="${#fields.hasErrors('address')} ? 'border-danger' : ''">
+                                    <div class="alert alert-danger alert-dismissible fade show mt-3 me-6 pe-5 w-100"
+                                         role="alert" th:if="${#fields.hasErrors('address')}">
+                                        <strong th:errors="*{address}"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <label>Phone Number <span class="text-danger"> *</span></label>
+                                    <input type="text" name="fname" th:field="*{phone}" th:classappend="${#fields.hasErrors('phone')} ? 'border-danger' : ''">
+                                    <div class="alert alert-danger alert-dismissible fade show mt-3 me-6 pe-5 w-100"
+                                         role="alert" th:if="${#fields.hasErrors('phone')}">
+                                        <strong th:errors="*{phone}"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-inner">
+                                    <label>Email</label>
+                                    <input type="email" name="email" th:field="*{email}">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-inner">
+                                    <label>Note</label>
+                                    <textarea name="message" th:field="*{note}" rows="6"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 px-4" >
+                    <div class="added-product-summary mb-30">
+                        <h5>Order Summary</h5>
+                        <ul class="added-products">
+                            <li class="single-product" th:each="cart:${carts}">
+                                <div class="product-area">
+                                    <div class="product-img">
+                                        <img th:src="@{|/uploads/images/${cart.product.image}|}" alt>
+                                    </div>
+                                    <div class="product-info">
+                                        <h5><a th:href="@{/product/{id}(id=${cart.getProduct().productId})}"
+                                               th:text="${cart.getProduct().productName}"></a></h5>
+                                        <div class="product-total">
+                                            <div class="quantity-counter">
+                                                <input name="quantity" type="text" class="quantity__input"
+                                                       th:value="${cart.quantity}">
+                                            </div>
+                                            <strong> <i class="bi bi-x-lg px-2"></i>
+                                                <span class="product-price" th:text="${#numbers.formatDecimal(cart.product.price, 0, 'COMMA', 0, 'POINT') + ' $'}"></span>
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="cost-summary total-cost mb-30">
+                        <table class="table cost-summary-table total-cost">
+                            <thead>
+                            <tr>
+                                <th>Total</th>
+                                <th th:text="${#numbers.formatDecimal(cartTotal, 0, 'COMMA', 0, 'POINT') + ' $'}"></th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="payment-form">
+                        <div class="payment-methods">
+                            <div class="choose-payment-method pb-25" id="strip-payment" >
+                                <h5>Select Your Payment Method</h5>
+                                <div class="row gy-4 g-4">
+                                    <div class="col-md-12">
+                                        <div class="input-area">
+                                            <div class="row gy-4">
+                                                <div class="col-sm-12">
+                                                    <select name="payment">
+                                                        <option value="Cash on delivery">Cash on delivery</option>
+                                                        <option value="Card">Card</option>
+                                                        <option value="Momo">Momo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            <div class="payment-form-bottom d-flex align-items-start">-->
+<!--                                <input type="checkbox" class="custom-check-box" id="terms">-->
+<!--                                <label for="terms">I have read and agree to the website <a href="#">Terms and-->
+<!--                                    conditions</a></label>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                    <div class="place-order-btn ps-4">
+                        <button type="submit" class="primary-btn1 hover-btn3">Place Order</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<th:block th:insert="client/layout/footer.html"></th:block>
+<th:block th:insert="client/layout/back-to-top.html"></th:block>
+
+<th:block th:insert="client/layout/script.html"></th:block>
+</body>
+
+</html>
